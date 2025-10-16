@@ -2158,14 +2158,14 @@ impl MotorCurrentVectorMeasurement {
 
     pub const IQ_MIN: i32 = 0_i32;
     pub const IQ_MAX: i32 = 0_i32;
-    pub const ID_MIN: i32 = 0_i32;
-    pub const ID_MAX: i32 = 0_i32;
+    pub const IDD_MIN: i32 = 0_i32;
+    pub const IDD_MAX: i32 = 0_i32;
 
     /// Construct new MotorCurrentVectorMeasurement from values
-    pub fn new(iq: i32, id: i32) -> Result<Self, CanError> {
+    pub fn new(iq: i32, idd: i32) -> Result<Self, CanError> {
         let mut res = Self { raw: [0u8; 8] };
         res.set_iq(iq)?;
-        res.set_id(id)?;
+        res.set_idd(idd)?;
         Ok(res)
     }
 
@@ -2218,7 +2218,7 @@ impl MotorCurrentVectorMeasurement {
         Ok(())
     }
 
-    /// Id
+    /// Idd
     ///
     /// Real component of the applied non-rotating current vector to the motor. This vector represents the field current of the motor.
     ///
@@ -2227,11 +2227,11 @@ impl MotorCurrentVectorMeasurement {
     /// - Unit: "A"
     /// - Receivers: Vector__XXX
     #[inline(always)]
-    pub fn id(&self) -> i32 {
-        self.id_raw()
+    pub fn idd(&self) -> i32 {
+        self.idd_raw()
     }
 
-    /// Get raw value of Id
+    /// Get raw value of Idd
     ///
     /// - Start bit: 32
     /// - Signal size: 32 bits
@@ -2240,7 +2240,7 @@ impl MotorCurrentVectorMeasurement {
     /// - Byte order: LittleEndian
     /// - Value type: Signed
     #[inline(always)]
-    pub fn id_raw(&self) -> i32 {
+    pub fn idd_raw(&self) -> i32 {
         let signal = self.raw.view_bits::<Lsb0>()[32..64].load_le::<i32>();
 
         let factor = 1;
@@ -2248,9 +2248,9 @@ impl MotorCurrentVectorMeasurement {
         i32::from(signal).saturating_mul(factor).saturating_add(0)
     }
 
-    /// Set value of Id
+    /// Set value of Idd
     #[inline(always)]
-    pub fn set_id(&mut self, value: i32) -> Result<(), CanError> {
+    pub fn set_idd(&mut self, value: i32) -> Result<(), CanError> {
         let factor = 1;
         let value = value.checked_sub(0).ok_or(CanError::ParameterOutOfRange {
             message_id: MotorCurrentVectorMeasurement::MESSAGE_ID,
@@ -2318,7 +2318,7 @@ impl core::fmt::Debug for MotorCurrentVectorMeasurement {
         if f.alternate() {
             f.debug_struct("MotorCurrentVectorMeasurement")
                 .field("iq", &self.iq())
-                .field("id", &self.id())
+                .field("idd", &self.idd())
                 .finish()
         } else {
             f.debug_tuple("MotorCurrentVectorMeasurement")
@@ -2332,9 +2332,9 @@ impl defmt::Format for MotorCurrentVectorMeasurement {
     fn format(&self, f: defmt::Formatter) {
         defmt::write!(
             f,
-            "MotorCurrentVectorMeasurement {{ Iq={:?} Id={:?} }}",
+            "MotorCurrentVectorMeasurement {{ Iq={:?} Idd={:?} }}",
             self.iq(),
-            self.id(),
+            self.idd(),
         );
     }
 }
@@ -2343,8 +2343,8 @@ impl defmt::Format for MotorCurrentVectorMeasurement {
 impl<'a> Arbitrary<'a> for MotorCurrentVectorMeasurement {
     fn arbitrary(u: &mut Unstructured<'a>) -> Result<Self, arbitrary::Error> {
         let iq = u.int_in_range(0..=0)?;
-        let id = u.int_in_range(0..=0)?;
-        MotorCurrentVectorMeasurement::new(iq, id).map_err(|_| arbitrary::Error::IncorrectFormat)
+        let idd = u.int_in_range(0..=0)?;
+        MotorCurrentVectorMeasurement::new(iq, idd).map_err(|_| arbitrary::Error::IncorrectFormat)
     }
 }
 

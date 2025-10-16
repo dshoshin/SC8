@@ -81,7 +81,7 @@ SG_ Vd : 32|32@1- (1,0) [0|0] "V" Vector__XXX
  
 BO_ 134 MotorCurrentVectorMeasurement: 8 WaveSculptor22
 SG_ Iq : 0|32@1- (1,0) [0|0] "A" Vector__XXX
-SG_ Id : 32|32@1- (1,0) [0|0] "A" Vector__XXX
+SG_ Idd : 32|32@1- (1,0) [0|0] "A" Vector__XXX
  
 BO_ 135 BackEMFMeasurementPrediction: 8 WaveSculptor22
 SG_ BEMFq : 0|32@1- (1,0) [0|0] "V" Vector__XXX
@@ -134,7 +134,7 @@ CM_ SG_ 132 PhaseCurrentC "RMS current in motor Phase C.";
 CM_ SG_ 133 Vq "Imaginary component of the applied non-rotating voltage vector to the motor.";
 CM_ SG_ 133 Vd "Real component of the applied non-rotating voltage vector to the motor.";
 CM_ SG_ 134 Iq "Imaginary component of the applied non-rotating current vector to the motor. This current produces torque in the motor and should be in phase with the back-EMF of the motor";
-CM_ SG_ 134 Id "Real component of the applied non-rotating current vector to the motor. This vector represents the field current of the motor.";
+CM_ SG_ 134 Idd "Real component of the applied non-rotating current vector to the motor. This vector represents the field current of the motor.";
 CM_ SG_ 135 BEMFq "The peak of the phase to neutral motor voltage.";
 CM_ SG_ 135 BEMFd "By definition this value is always 0V.";
 CM_ SG_ 136 Supply15V "Actual voltage level of the 15V power rail.";
@@ -183,7 +183,7 @@ SIG_VALTYPE_ 132 PhaseCurrentC : 1;
 SIG_VALTYPE_ 133 Vq : 1;
 SIG_VALTYPE_ 133 Vd : 1;
 SIG_VALTYPE_ 134 Iq : 1;
-SIG_VALTYPE_ 134 Id : 1;
+SIG_VALTYPE_ 134 Idd : 1;
 SIG_VALTYPE_ 135 BEMFq : 1;
 SIG_VALTYPE_ 135 BEMFd : 1;
 SIG_VALTYPE_ 136 Supply15V : 1;

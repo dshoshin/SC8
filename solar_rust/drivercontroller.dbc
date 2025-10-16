@@ -48,10 +48,6 @@ BO_ 1282 Power: 8 DriverControl
 SG_ Reserved : 0|32@1- (1,0) [0|0] "" Vector__XXX
 SG_ SetpointBusCurrent : 32|32@1- (100,0) [0|0] "%" Vector__XXX
 
-BO_ 1283 Reset: 8 DriverControl
-SG_ Unused : 0|32@1- (1,0) [0|0] "" Vector__XXX
-SG_ Unused : 32|32@1- (1,0) [0|0] "" Vector__XXX
- 
 BO_ 1285 Switch: 8 DriverControl
 SG_ IgnitionRun : 5|1@1+ (1,0) [0|0] "Selected" Vector__XXX
 SG_ Flags : 48|8@1+ (1,0) [0|0] "" Vector__XXX
