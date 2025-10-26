@@ -12,4 +12,7 @@ defmt = "1.0.1"
 embedded-can = "0.4.1"
 socketcan = "3.3"
 
-
+[features]
+arb = []
+std = []
+debug = []
